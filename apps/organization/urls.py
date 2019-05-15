@@ -3,6 +3,7 @@ from django.conf.urls import url
 
 from .views import OrgView, AddUserAsk, OrgHome, OrgCourseHome, OrgDescHome, TeacherHome
 
+
 urlpatterns = [
     url(r'^list/$', OrgView.as_view(), name='list'),
     url(r'^add_ask/$', AddUserAsk.as_view(), name='add_ask'),
