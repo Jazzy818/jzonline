@@ -139,18 +139,19 @@ class UserFavView(View):
     def post(self, request):
         fav_id = request.POST.get('fav_id', 0)
         fav_type = request.POST.get('fav_type', 0)
-        if not request.uesr.is_authenticated():
-            return HttpResponse('{"status“":"fail","msg":"用户未登录"}', contentType='application/json')
-        exist_record = UserFavorite.objects.filter(user=request, fav_id=int(fav_id), fav_type=int(fav_type))
+        if not request.user.is_authenticated():
+            return HttpResponse('{"status":"fail","msg":"用户未登录"}', content_type='application/json')
+        exist_record = UserFavorite.objects.filter(user=request.user, fav_id=int(fav_id), fav_type=int(fav_type))
         if exist_record:
             #存在记录则取消
             exist_record.delete()
-            return HttpResponse('{"status":"fail","msg":"收藏"}', content_type="application.json")
+            return HttpResponse('{"status":"success","msg":"收藏"}', content_type="application.json")
         else:
             user_fav =UserFavorite()
             if int(fav_id)>0 and int(fav_type)>0:
                 user_fav.fav_type = fav_type
                 user_fav.fav_id = fav_id
+                user_fav.user= request.user
                 user_fav.save()
                 return HttpResponse('{"status":"success","msg":"已收藏"}', content_type="application.json")
             else:

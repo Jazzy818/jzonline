@@ -74,7 +74,7 @@ class OrgHome(View):
         all_courses = all_orgs.course_set.all()[:3]
         all_teachers = all_orgs.teacher_set.all()[:1]
         # hot_orgs = all_orgs.order_by("-click_nums")[:3]
-        return render(request, 'org-detail-homepage.html',{
+        return render(request, 'org-detail-homepage.html', {
             'all_courses': all_courses,
             'all_teachers': all_teachers,
             'course_org': all_orgs,
@@ -88,7 +88,7 @@ class OrgCourseHome(View):
         all_courses = all_orgs.course_set.all()
         current_page = 'course'
         # hot_orgs = all_orgs.order_by("-click_nums")[:3]
-        return render(request, 'org-detail-course.html',{
+        return render(request, 'org-detail-course.html', {
             'all_courses': all_courses,
             'current_page': current_page,
             'course_org': all_orgs

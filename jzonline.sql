@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2019-05-14 07:47:37
+Date: 2019-05-16 00:16:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -202,7 +202,7 @@ CREATE TABLE `courses_course` (
   `click_nums` int(11) NOT NULL,
   `add_time` datetime NOT NULL,
   `org_id` int(11),
-  `image` varchar(100),
+  `image` varchar(100) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `courses_course_9cf869aa` (`org_id`),
   CONSTRAINT `courses_course_org_id_387fdc72_fk_organization_courseorg_id` FOREIGN KEY (`org_id`) REFERENCES `organization_courseorg` (`id`)
@@ -345,7 +345,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=gbk;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -382,6 +382,8 @@ INSERT INTO `django_migrations` VALUES ('29', 'courses', '0003_course_image', '2
 INSERT INTO `django_migrations` VALUES ('30', 'courses', '0004_remove_course_image', '2019-05-03 20:19:30');
 INSERT INTO `django_migrations` VALUES ('31', 'courses', '0005_course_image', '2019-05-03 20:35:00');
 INSERT INTO `django_migrations` VALUES ('32', 'organization', '0006_auto_20190511_1307', '2019-05-11 13:07:26');
+INSERT INTO `django_migrations` VALUES ('33', 'courses', '0006_auto_20190516_0016', '2019-05-16 00:16:22');
+INSERT INTO `django_migrations` VALUES ('34', 'operation', '0003_remove_userfavorite_course', '2019-05-16 00:16:22');
 
 -- ----------------------------
 -- Table structure for django_session
@@ -399,6 +401,7 @@ CREATE TABLE `django_session` (
 -- Records of django_session
 -- ----------------------------
 INSERT INTO `django_session` VALUES ('38b5y96gui6k1raa3yoej6vyyvtg3h6g', 'NGEwZjkzYWJlNmZkODJmMzZjNGMwMTA5YmNiZDA5ZTcxZTBkODVmNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiTElTVF9RVUVSWSI6W1sidXNlcnMiLCJ1c2VycHJvZmlsZSJdLCIiXSwiX2F1dGhfdXNlcl9oYXNoIjoiYjhiOTFjNGZlOWJhZWZjNzEzMWY5ODBkMmVkYjI0NWUwMjYzNDFiMSIsIl9hdXRoX3VzZXJfaWQiOiIxIiwid2l6YXJkX3hhZG1pbnVzZXJ3aWRnZXRfYWRtaW5fd2l6YXJkX2Zvcm1fcGx1Z2luIjp7InN0ZXBfZmlsZXMiOnt9LCJzdGVwIjoiV2lkZ2V0XHU3YzdiXHU1NzhiIiwiZXh0cmFfZGF0YSI6e30sInN0ZXBfZGF0YSI6e319fQ==', '2019-04-19 22:20:49');
+INSERT INTO `django_session` VALUES ('4hit3gxmlhavtht5zwu58bo18u7nhyuc', 'NDZlYzhmOWI5YTUyM2U5NGMzNDI4OWMwOWFlMjQ2Nzk0ZjJjMzRjZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImI4YjkxYzRmZTliYWVmYzcxMzFmOTgwZDJlZGIyNDVlMDI2MzQxYjEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJ1c2Vycy52aWV3cy5DdXN0b21CYWNrZW5kcyIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=', '2019-05-30 00:11:11');
 INSERT INTO `django_session` VALUES ('65cgfjy01pnj5nwv2jevgzhli76kw4qc', 'Mjk1ZDYwOTI5OGU4NDAxZmY3YmI1Y2NmODNhZjMzNmE4ODMyMzY0Njp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJzLnZpZXdzLkN1c3RvbUJhY2tlbmRzIiwiTElTVF9RVUVSWSI6W1sib3JnYW5pemF0aW9uIiwiY291cnNlb3JnIl0sIiJdLCJfYXV0aF91c2VyX2hhc2giOiJiOGI5MWM0ZmU5YmFlZmM3MTMxZjk4MGQyZWRiMjQ1ZTAyNjM0MWIxIiwiX2F1dGhfdXNlcl9pZCI6IjEifQ==', '2019-04-30 22:36:45');
 INSERT INTO `django_session` VALUES ('7q2xs13mu60xh36uh7chmb3ze85icy4o', 'NDZlYzhmOWI5YTUyM2U5NGMzNDI4OWMwOWFlMjQ2Nzk0ZjJjMzRjZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImI4YjkxYzRmZTliYWVmYzcxMzFmOTgwZDJlZGIyNDVlMDI2MzQxYjEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJ1c2Vycy52aWV3cy5DdXN0b21CYWNrZW5kcyIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=', '2019-04-21 16:01:22');
 INSERT INTO `django_session` VALUES ('a2j71476licblj4h5mrrpfzjyi0q3zz2', 'NTgxNGU4YTU4MzM5MmRmZGM2N2FjYjIxMjNmM2YyMzM1MmM2MzM2MDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiTElTVF9RVUVSWSI6W1sidXNlcnMiLCJ1c2VycHJvZmlsZSJdLCIiXSwiX2F1dGhfdXNlcl9oYXNoIjoiYjhiOTFjNGZlOWJhZWZjNzEzMWY5ODBkMmVkYjI0NWUwMjYzNDFiMSIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=', '2019-04-21 13:37:17');
@@ -407,7 +410,7 @@ INSERT INTO `django_session` VALUES ('fzegii6gy98sbrl7vbhawovs3arja2mf', 'NDZlYz
 INSERT INTO `django_session` VALUES ('kvecibg93vyzrcc2r1lctp9m8l1a17jw', 'NDZlYzhmOWI5YTUyM2U5NGMzNDI4OWMwOWFlMjQ2Nzk0ZjJjMzRjZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImI4YjkxYzRmZTliYWVmYzcxMzFmOTgwZDJlZGIyNDVlMDI2MzQxYjEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJ1c2Vycy52aWV3cy5DdXN0b21CYWNrZW5kcyIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=', '2019-05-04 14:00:01');
 INSERT INTO `django_session` VALUES ('kzcc0ewt1jvq9hbmogr470w7wqjm79zx', 'YTFiNTk4ZTJmMjQ2MDFhNDE2ZTQ5NDJlOTlmNzZjNWRhYjBjMTBhOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjRkNDI0ODEzZTRiZTA1ZjU0ZmYxMWQwNzVhZGFiNTM1ZTUwNzBmZjYiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJ1c2Vycy52aWV3cy5DdXN0b21CYWNrZW5kcyIsIl9hdXRoX3VzZXJfaWQiOiIxMiJ9', '2019-04-28 13:02:51');
 INSERT INTO `django_session` VALUES ('lmu134bgu593x1kx3ede7h3xc1s7g1zj', 'MTljNDM5NzMyZjRjMzBkODgyNWRlOGZiMmIxMjA2YzcyZTJiYWZjYTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiTElTVF9RVUVSWSI6W1siY291cnNlcyIsImxlc3NvbiJdLCIiXSwiX2F1dGhfdXNlcl9oYXNoIjoiYjhiOTFjNGZlOWJhZWZjNzEzMWY5ODBkMmVkYjI0NWUwMjYzNDFiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwid2l6YXJkX3hhZG1pbnVzZXJ3aWRnZXRfYWRtaW5fd2l6YXJkX2Zvcm1fcGx1Z2luIjp7InN0ZXBfZmlsZXMiOnt9LCJzdGVwIjpudWxsLCJleHRyYV9kYXRhIjp7fSwic3RlcF9kYXRhIjp7fX19', '2019-04-20 11:12:11');
-INSERT INTO `django_session` VALUES ('xhao2fbelbootftpppho0j32liptnobl', 'NDUyMzI2MzM1MGM3ZGY2NDgxM2FlYzRiOWEwMjhkOGIzYmNiOWFkYjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiTElTVF9RVUVSWSI6W1sib3JnYW5pemF0aW9uIiwidGVhY2hlciJdLCIiXSwiX2F1dGhfdXNlcl9oYXNoIjoiYjhiOTFjNGZlOWJhZWZjNzEzMWY5ODBkMmVkYjI0NWUwMjYzNDFiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJzLnZpZXdzLkN1c3RvbUJhY2tlbmRzIn0=', '2019-05-26 18:24:29');
+INSERT INTO `django_session` VALUES ('xhao2fbelbootftpppho0j32liptnobl', 'OGU0OWY2NzgwNjY0OGMyNjM3NTJkN2I1OWE4NTkxOWJhNWQzNDI0ODp7Il9hdXRoX3VzZXJfYmFja2VuZCI6InVzZXJzLnZpZXdzLkN1c3RvbUJhY2tlbmRzIiwiTElTVF9RVUVSWSI6W1sib3JnYW5pemF0aW9uIiwidGVhY2hlciJdLCIiXSwiX2F1dGhfdXNlcl9oYXNoIjoiYjhiOTFjNGZlOWJhZWZjNzEzMWY5ODBkMmVkYjI0NWUwMjYzNDFiMSIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=', '2019-05-29 23:23:57');
 
 -- ----------------------------
 -- Table structure for operation_coursecomments
@@ -476,12 +479,9 @@ CREATE TABLE `operation_userfavorite` (
   `fav_id` int(11) NOT NULL,
   `fav_type` int(11) NOT NULL,
   `add_time` datetime NOT NULL,
-  `course_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
-  KEY `operation_userfavorite_course_id_3f140ade_fk_courses_course_id` (`course_id`),
   KEY `operation_userfavorite_e8701ad4` (`user_id`),
-  CONSTRAINT `operation_userfavorite_course_id_3f140ade_fk_courses_course_id` FOREIGN KEY (`course_id`) REFERENCES `courses_course` (`id`),
   CONSTRAINT `operation_userfavorite_user_id_ad46a6af_fk_users_userprofile_id` FOREIGN KEY (`user_id`) REFERENCES `users_userprofile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
@@ -670,7 +670,7 @@ CREATE TABLE `users_userprofile` (
 -- ----------------------------
 -- Records of users_userprofile
 -- ----------------------------
-INSERT INTO `users_userprofile` VALUES ('1', 'pbkdf2_sha256$24000$rjBcbJltUlpB$O2qtsDYyUXJeLWlhfyvio3ac9rDy3HK0r/wCGJxC1WA=', '2019-04-23 22:36:06', '1', 'admin', '', '', '827088212@qq.com', '1', '1', '2019-04-05 18:18:15', '', null, 'female', '', null, 'image/default.png');
+INSERT INTO `users_userprofile` VALUES ('1', 'pbkdf2_sha256$24000$rjBcbJltUlpB$O2qtsDYyUXJeLWlhfyvio3ac9rDy3HK0r/wCGJxC1WA=', '2019-05-16 00:11:11', '1', 'admin', '', '', '827088212@qq.com', '1', '1', '2019-04-05 18:18:15', '', null, 'female', '', null, 'image/default.png');
 INSERT INTO `users_userprofile` VALUES ('2', 'pbkdf2_sha256$24000$hNBDTvtuSAwi$4ULqd3t8CZ3uE0Zs7oE9o1i1C2s/IsLrE+wyHBz/9Ro=', null, '0', 'liyalan', '', '', '', '0', '1', '2019-04-05 18:20:00', '', null, 'female', '', null, 'image/default.png');
 INSERT INTO `users_userprofile` VALUES ('12', 'pbkdf2_sha256$24000$kTJ83qCZVb08$kWKNjkybejF9kRZdaA6Hrne1e5MIFBdyJVfzhLpypwo=', '2019-04-14 16:44:37', '0', '13120511312@163.com', '', '', '13120511312@163.com', '0', '1', '2019-04-14 12:44:56', '', null, 'female', '', null, 'image/default.png');
 
