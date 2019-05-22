@@ -1,7 +1,7 @@
 # -*-coding:utf-8 -*-
 
 import xadmin
-from operation.models import UserAsk, CourseComments, UserFavorite, UserMessage
+from operation.models import UserAsk, CourseComments, UserFavorite, UserMessage, UserCourse
 from users.models import EmailVerifyRecord, Banner
 
 
@@ -29,7 +29,13 @@ class UserMessageAdmin(object):
     list_filter = ['user', 'message', 'has_read']
 
 
+class UserCourseAdmin(object):
+    search_fields = ['user', 'course', 'add_time']
+    list_display = ['user', 'course','add_time']
+    list_filter = ['user',  'course']
+
 xadmin.site.register(UserAsk, UserAskAdmin)
 xadmin.site.register(CourseComments, CourseCommentsAdmin)
 xadmin.site.register(UserFavorite, UserFavoriteAdmin)
 xadmin.site.register(UserMessage, UserMessageAdmin)
+xadmin.site.register(UserCourse, UserCourseAdmin)

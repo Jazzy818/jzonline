@@ -10,6 +10,7 @@ from organization.models import CourseOrg
 class Course(models.Model):
     name = models.CharField(max_length=50, verbose_name=u"课程名")
     desc = models.CharField(max_length=300, verbose_name=u"课程描述")
+    category = models.CharField(max_length=40, verbose_name=u"课程类别",default="后端开发")
     detail = models.TextField(verbose_name=u"课程详情")
     degree = models.CharField(max_length=10, choices=(("cj", "初级"), ("zj", u"中级"), ("gj", u"高级")))
     learn_times = models.IntegerField(default=0, verbose_name=u"学习时长(分钟)")
@@ -23,6 +24,12 @@ class Course(models.Model):
     class Meta:
         verbose_name = u"课程"
         verbose_name_plural = verbose_name
+
+    def get_zj_nums(self):
+        return self.lesson_set.all().count()
+
+    def get_learn_students(self):
+        return self.usercourse_set.all()[:5]
 
     def __unicode__(self):
         return self.name

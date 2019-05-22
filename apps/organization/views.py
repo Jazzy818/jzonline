@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
 from pure_pagination import Paginator, PageNotAnInteger
 
+from operation.models import UserFavorite
 from organization.forms import UerAskForm
 from organization.models import CourseOrg, CityDict
 
@@ -17,6 +18,7 @@ class OrgView(View):
     '''课程机构列表'''
 
     def get(self, request):
+        active_page = 'org'
         courses = CourseOrg.objects.all()
         cities = CityDict.objects.all()
         hot_orgs = courses.order_by("-click_nums")[:3]
@@ -49,7 +51,8 @@ class OrgView(View):
             "city_id": city_id,
             "category": category,
             "hot_orgs": hot_orgs,
-            "sort_type": sort
+            "sort_type": sort,
+            "active_page": active_page
         })
 
 
@@ -70,6 +73,10 @@ class AddUserAsk(View):
 class OrgHome(View):
     def get(self,request,org_id):
         current_page = 'home'
+        has_fav = False
+        if request.user.is_authenticated():
+            if UserFavorite.objects.filter(user=request.user, fav_id=int(org_id), fav_type=int(2)):
+                has_fav=True
         all_orgs = CourseOrg.objects.get(id=int(org_id))
         all_courses = all_orgs.course_set.all()[:3]
         all_teachers = all_orgs.teacher_set.all()[:1]
@@ -78,7 +85,8 @@ class OrgHome(View):
             'all_courses': all_courses,
             'all_teachers': all_teachers,
             'course_org': all_orgs,
-            'current_page': current_page
+            'current_page': current_page,
+            'has_fav':has_fav
         })
 
 
@@ -87,11 +95,16 @@ class OrgCourseHome(View):
         all_orgs = CourseOrg.objects.get(id=int(org_id))
         all_courses = all_orgs.course_set.all()
         current_page = 'course'
+        has_fav = False
+        if request.user.is_authenticated():
+            if UserFavorite.objects.filter(user=request.user, fav_id=int(org_id), fav_type=int(2)):
+                has_fav = True
         # hot_orgs = all_orgs.order_by("-click_nums")[:3]
         return render(request, 'org-detail-course.html', {
             'all_courses': all_courses,
             'current_page': current_page,
-            'course_org': all_orgs
+            'course_org': all_orgs,
+            'has_fav':has_fav
         })
 
 
@@ -100,11 +113,16 @@ class OrgDescHome(View):
         all_orgs = CourseOrg.objects.get(id=int(org_id))
         all_courses = all_orgs.course_set.all()
         current_page = 'desc'
+        has_fav = False
+        if request.user.is_authenticated():
+            if UserFavorite.objects.filter(user=request.user, fav_id=int(org_id), fav_type=int(2)):
+                has_fav = True
         # hot_orgs = all_orgs.order_by("-click_nums")[:3]
         return render(request, 'org-detail-desc.html', {
             'all_courses': all_courses,
             'current_page': current_page,
-            'course_org': all_orgs
+            'course_org': all_orgs,
+            'has_fav': has_fav
         })
 
 
@@ -113,9 +131,13 @@ class TeacherHome(View):
         all_orgs = CourseOrg.objects.get(id=int(org_id))
         current_page = 'teacher'
         all_teachers = all_orgs.teacher_set.all()
-
+        has_fav = False
+        if request.user.is_authenticated():
+            if UserFavorite.objects.filter(user=request.user, fav_id=int(org_id), fav_type=int(2)):
+                has_fav = True
         return render(request, 'org-detail-teachers.html', {
             'all_teachers': all_teachers,
             'current_page': current_page,
-            'course_org': all_orgs
+            'course_org': all_orgs,
+            'has_fav': has_fav
         })

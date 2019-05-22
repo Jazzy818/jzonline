@@ -37,6 +37,8 @@ urlpatterns = [
     url(r'^modify_pwd/$', ModifyView.as_view(), name='modify_pwd'),
     #课程机构首页
     url(r'^org/', include('organization.urls', namespace='org'), ),
+    # 课程相关配置
+    url(r'^course/', include('courses.urls', namespace='course'), ),
     #配置上传文件的访问处理函数
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
     #收藏
