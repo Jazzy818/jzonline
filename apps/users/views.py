@@ -147,11 +147,11 @@ class UserFavView(View):
             exist_record.delete()
             return HttpResponse('{"status":"success","msg":"收藏"}', content_type="application.json")
         else:
-            user_fav =UserFavorite()
-            if int(fav_id)>0 and int(fav_type)>0:
+            user_fav = UserFavorite()
+            if int(fav_id) > 0 and int(fav_type) > 0:
                 user_fav.fav_type = fav_type
                 user_fav.fav_id = fav_id
-                user_fav.user= request.user
+                user_fav.user = request.user
                 user_fav.save()
                 return HttpResponse('{"status":"success","msg":"已收藏"}', content_type="application.json")
             else:

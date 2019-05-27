@@ -34,6 +34,7 @@ class UserCourseAdmin(object):
     list_display = ['user', 'course','add_time']
     list_filter = ['user',  'course']
 
+
 xadmin.site.register(UserAsk, UserAskAdmin)
 xadmin.site.register(CourseComments, CourseCommentsAdmin)
 xadmin.site.register(UserFavorite, UserFavoriteAdmin)
