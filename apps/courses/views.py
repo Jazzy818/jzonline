@@ -9,8 +9,9 @@ from django.shortcuts import render
 from django.views.generic import View
 from pure_pagination import Paginator
 
-from courses.models import Course, Lesson
+from courses.models import Course, Lesson, Notification, TeacherNotice
 from operation.models import UserFavorite
+from organization.models import Teacher
 
 
 class CourseView(View):
@@ -59,7 +60,7 @@ class CourseDetailView(View):
         else:
             rec_course = {}
         if request.user.is_authenticated():
-            if UserFavorite.objects.filter(user=request.user, fav_id=int(course_id), fav_type=int(1)): #课程
+            if UserFavorite.objects.filter(user=request.user, fav_id=int(course_id), fav_type=int(1)):  # 课程
                 has_fav_course = True
             if UserFavorite.objects.filter(user=request.user, fav_id=int(course.org_id), fav_type=int(2)):  # 机构
                 has_fav_org = True
@@ -70,3 +71,30 @@ class CourseDetailView(View):
             'rec_course': rec_course
         })
 
+
+class CourseLessonsView(View):
+    def get(self, request, course_id):
+        global teacher_notice
+        course = Course.objects.get(id=course_id)
+        lessons = Lesson.objects.filter(course=course)
+        notice = Notification.objects.get(course=course_id)
+        teacher = Teacher.objects.get(course=course_id)
+        if teacher:
+            teacher_notice = TeacherNotice.objects.get(teacher=teacher,course = course)
+        return render(request, 'course-video.html', {
+            'course': course,
+            'teacher_notice':teacher_notice,
+            'teacher':teacher,
+            'notice': notice,
+            'lessons': lessons,
+            'current_page': 'lessons'
+        })
+
+
+class CourseCommentsView(View):
+    def get(self, request, course_id):
+        course = Course.objects.get(id=course_id)
+        return render(request, 'course-comment.html', {
+            'course': course,
+            'current_page': 'comments'
+        })

@@ -27,6 +27,7 @@ class CourseOrg(models.Model):
     desc = models.TextField(verbose_name=u"机构描述")
     fav_nums = models.IntegerField(default=0, verbose_name=u"收藏数")
     click_nums = models.IntegerField(default=0, verbose_name=u"点击数")
+
     category = models.CharField(max_length=100, default="pxjg", verbose_name=u"机构类别",
                                 choices=(("pxjg", "培训机构"), ("gx", "高校")))
     image = models.ImageField(upload_to="course/%Y/%m", verbose_name=u"LOGO")  # 年月
